@@ -61,16 +61,23 @@
 
   const generateTitleLinks = function() {
 
-    /* remove contents of titleList */
+    /* [DONE] remove contents of titleList */
 
     const titleList = document.querySelector(optTitleListSelector);
     console.log('titleList:', titleList);
 
     titleList.innerHTML = '';
 
-    /* for each article */
+    /* [DONE] for each article */
+
+    const articles = document.querySelectorAll(optArticleSelector);
+    console.log(articles);
+    for(let article of articles) {
 
       /* get the article id */
+
+    const articleId = article.getAttribute('id');
+    console.log(articleId);
 
       /* find the title element */
 
@@ -80,6 +87,7 @@
 
       /* insert link into titleList */
 
+    }
   }
 
   generateTitleLinks();
