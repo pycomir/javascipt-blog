@@ -1,14 +1,8 @@
-//function to find links <a> in class .titles
-
-/*document.getElementById('test-button').addEventListener('click', function(){
-  const links = document.querySelectorAll('.titles a');
-  console.log('links:', links);
-});*/
 {
   const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
-    console.log(event)
+    console.log(event);
     console.log('Link was clicked!');
 
     /* [DONE] remove class 'active' from all article links  */
@@ -16,7 +10,7 @@
     const activeLinks = document.querySelectorAll('.titles a.active');
 
     for(let activeLink of activeLinks){
-    activeLink.classList.remove('active');
+      activeLink.classList.remove('active');
     }
 
     /* [DONE]add class 'active' to the clicked link */
@@ -47,7 +41,7 @@
 
     targetArticle.classList.add('active');
     console.log('targetArticle:', targetArticle);
-  }
+  };
 
 
   const optArticleSelector = '.post',
@@ -89,12 +83,12 @@
       console.log(linkHTML);
 
       /* insert link into titleList */
+      html = html + linkHTML;
 
       /*titleList.insertAdjacentHTML('beforeend', linkHTML);
       console.log(titleList);*/
-      html = html + linkHTML;
     }
-    
+
     titleList.innerHTML = html;
     console.log(html);
 
@@ -104,7 +98,7 @@
     for(let link of links){
       link.addEventListener('click', titleClickHandler);
     }
-  }
+  };
 
   generateTitleLinks();
   console.log(generateTitleLinks);
