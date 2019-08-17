@@ -42,7 +42,8 @@
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
-    optArticleAuthorSelector = '.post .post-author';
+    optArticleAuthorSelector = '.post .post-author',
+    optTagsListSelector = '.tags.list';
 
   const generateTitleLinks = function(customSelector = '') {
     //console.log(generateTitleLinks);
@@ -96,9 +97,13 @@
 
   const generateTags = function() {
 
+    /* [NEW] create a new variable allTags with an empty array */
+    let allTags = [];
+    console.log(allTags);
+
     /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
-    console.log(articles);
+    //console.log(articles);
 
     /* START LOOP: for every article: */
     for(let article of articles) {
@@ -131,6 +136,12 @@
         html = html + linkHTML;
         //console.log(html);
 
+        /* [NEW] check if this link is NOT already in allTags */
+        if(allTags.indexOf(linkHTML) == -1){
+          /* [NEW] add generated code to allTags array */
+          allTags.push(linkHTML);
+          //console.log(allTags);
+        }
         /* END LOOP: for each tag */
       }
 
@@ -139,11 +150,15 @@
       titleList.innerHTML = html;
       //console.log(html);
 
-      /*titleList.insertAdjacentHTML('beforeend', html);
-      console.log(titleList);*/
-
     /* END LOOP: for every article: */
     }
+    /* [NEW] find list of tags in right column */
+    const tagList = document.querySelector('.tags');
+    //console.log(tagList);
+
+    /* [NEW] add html from allTags to tagList */
+    tagList.innerHTML = allTags.join(' ');
+    console.log(tagList);
   };
   generateTags();
 
@@ -182,7 +197,7 @@
 
     /* find all tag links with "href" attribute equal to the "href" constant */
     const tagLinks = document.querySelectorAll(href);
-    console.log(tagLinks);
+    //console.log(tagLinks);
 
     /* START LOOP: for each found tag link */
     for(let tagLink of tagLinks) {
@@ -201,7 +216,7 @@
     /* find all links to tags */
 
     const links = document.querySelectorAll('.post-tags a[href^="#tag-"]');
-    console.log (links);
+    //console.log (links);
 
     /* START LOOP: for each link */
     for(let link of links) {
@@ -236,7 +251,7 @@
 
       /*create HTML of the link*/
       const linkHTML ='by &nbsp' + '<a href="#author-' + author +'">' + author + '</a>';
-      console.log(linkHTML);
+      //console.log(linkHTML);
 
       /* insert HTML of all the links into the author wrapper */
       titleList.innerHTML = html + linkHTML;
@@ -255,21 +270,21 @@
     /* make new constant named "clickedElement" and give it the value of "this" */
 
     const clickedElement = this;
-    console.log(event);
-    console.log('Link was clicked!');
+    //console.log(event);
+    //console.log('Link was clicked!');
 
     /* make a new constant "href" and read the attribute "href" of the clicked element */
     const href = clickedElement.getAttribute('href');
-    console.log(href);
+    //console.log(href);
 
     /* make a new constant "author" and extract tag from the "href" constant */
     const author = href.replace('#author-', '');
-    console.log(author);
+    //console.log(author);
 
     /* find all author links with class active */
 
     const activeAuthors = document.querySelectorAll('a[href="' + href + '"]');
-    console.log(activeAuthors);
+    //console.log(activeAuthors);
 
     /* START LOOP: for each active tag link */
     for(let activeAuthor of activeAuthors) {
@@ -282,7 +297,7 @@
 
     /* find all author links with "href" attribute equal to the "href" constant */
     const authorLinks = document.querySelectorAll('href');
-    console.log(authorLinks);
+    //console.log(authorLinks);
 
     /* START LOOP: for each found tag link */
     for(let authorLink of authorLinks) {
@@ -299,7 +314,7 @@
   const addClickListenersToAuthors = function() {
     /* find all links to authors */
     const links = document.querySelectorAll('.post-author a');
-    console.log(links);
+    //console.log(links);
 
     /* START LOOP: for each link */
     for(let link of links) {
