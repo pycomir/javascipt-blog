@@ -40,10 +40,7 @@ body {
     color: lighten($color-dark, 20%);
   }
 }
- a {
-   text-decoration: none;
-   display: inline-block;
- }
+
 /* Layout */
 
 .wrapper {
@@ -93,6 +90,43 @@ body {
     display: inline-block;
   }
 }
+
+.sidebar .list.tags li {
+  display: inline;
+  a {
+    text-decoration: none;
+    &::after {
+      content: ' ';
+    }
+  }
+}
+
+
+
+.sidebar .list.tags {
+  .tag-size-5 {
+    font-size: 24px;
+    color: red;
+  }
+  .tag-size-4 {
+    font-size: 22px;
+    color: blue;
+  }
+  .tag-size-3 {
+    font-size: 20px;
+    color: green;
+  }
+  .tag-size-2 {
+    font-size: 18px;
+    color: pink;
+  }
+  .tag-size-1 {
+    font-size: 16px;
+    color: brown;
+  }
+}
+
+
 
 /* Authors */
 

@@ -32,11 +32,6 @@ body {
   color: #777777;
 }
 
-a {
-  text-decoration: none;
-  display: inline-block;
-}
-
 /* Layout */
 .wrapper {
   display: -ms-flexbox;
@@ -84,6 +79,43 @@ a {
 
 .list-horizontal li {
   display: inline-block;
+}
+
+.sidebar .list.tags li {
+  display: inline;
+}
+
+.sidebar .list.tags li a {
+  text-decoration: none;
+}
+
+.sidebar .list.tags li a::after {
+  content: ' ';
+}
+
+.sidebar .list.tags .tag-size-5 {
+  font-size: 24px;
+  color: red;
+}
+
+.sidebar .list.tags .tag-size-4 {
+  font-size: 22px;
+  color: blue;
+}
+
+.sidebar .list.tags .tag-size-3 {
+  font-size: 20px;
+  color: green;
+}
+
+.sidebar .list.tags .tag-size-2 {
+  font-size: 18px;
+  color: pink;
+}
+
+.sidebar .list.tags .tag-size-1 {
+  font-size: 16px;
+  color: brown;
 }
 
 /* Authors */

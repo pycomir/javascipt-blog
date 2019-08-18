@@ -40,7 +40,6 @@
 
   const generateTitleLinks = function(customSelector = '') {
     //console.log(generateTitleLinks);
-    //console.log(customSelector);
     /* [DONE] remove contents of titleList */
     const titleList = document.querySelector(optTitleListSelector);
     //console.log('titleList:', titleList);
@@ -89,6 +88,15 @@
     }
     return params;
   };
+
+  const calculateTagClass = function(count, params) {
+    const normalizedCount = count - params.min;
+    const normalizedMax = params.max - params.min;
+    const percentage = normalizedCount / normalizedMax;
+    const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+    return optCloudClassPrefix + classNumber;
+  };
+
 
   const generateTags = function() {
     /* [NEW] create a new variable allTags with an empty object */
@@ -144,7 +152,10 @@
     /*[NEW] start LOOP for for each tags in allTags*/
     for(let tag in allTags) {
       /*[NEW] generate code of a link and add it to allTagsHTML*/
-      allTagsHTML +=  '<a href="#tag-' + tag +'">' +  tag + ' (' + allTags[tag] + '), ' + ' </a> ';
+      const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
+      console.log(tagLinkHTML);
+
+      allTagsHTML +=  '<li><a class="' + tagLinkHTML + '" href="#tag-' + tag +'">' +  tag + '</a></li>';
       console.log(allTagsHTML);
     /*[NEW] END LOOP: for each tag in allTags*/
     }
