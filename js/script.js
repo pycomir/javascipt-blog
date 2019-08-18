@@ -2,8 +2,8 @@
   const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
-    //console.log(event);
-    //console.log('Link was clicked!');
+    console.log(event);
+    console.log('Link was clicked!');
     /* [DONE] remove class 'active' from all article links  */
     const activeLinks = document.querySelectorAll('.titles a.active');
     for(let activeLink of activeLinks){
@@ -34,11 +34,13 @@
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post .post-author',
-    optTagsListSelector = '.tags.list';
+    optTagsListSelector = '.list.tags',
+    optCloudClassCount = '5',
+    optCloudClassPrefix = 'tag-size-';
 
   const generateTitleLinks = function(customSelector = '') {
     //console.log(generateTitleLinks);
-    console.log(customSelector);
+    //console.log(customSelector);
     /* [DONE] remove contents of titleList */
     const titleList = document.querySelector(optTitleListSelector);
     //console.log('titleList:', titleList);
@@ -54,10 +56,10 @@
       /* [DONE] find the title element */
       /* [DONE] get the title from the title element */
       const articleTitle = article.querySelector(optTitleSelector).innerHTML;
-      console.log(articleTitle);
+      //console.log(articleTitle);
       /* create HTML of the link */
       const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-      console.log(linkHTML);
+      //console.log(linkHTML);
       /* insert link into titleList */
       html = html + linkHTML;
       /*titleList.insertAdjacentHTML('beforeend', linkHTML);
@@ -73,6 +75,20 @@
   };
 
   generateTitleLinks();
+
+  const calculateTagsParams = function(tags) {
+    const params = {max: 0, min: 999999};
+    for(let tag in tags) {
+        console.log(tag + ' is used ' + tags[tag] + ' times');
+        if(tags[tag] > params.max){
+          params.max = tags[tag];
+        }
+        if(tags[tag] < params.min){
+          params.min = tags[tag];
+        }
+    }
+    return params;
+  };
 
   const generateTags = function() {
     /* [NEW] create a new variable allTags with an empty object */
@@ -121,12 +137,14 @@
     /* [NEW] find list of tags in right column */
     const tagList = document.querySelector('.tags');
     //console.log(tagList);
+    const tagsParams = calculateTagsParams(allTags);
+    console.log('tagsParams:', tagsParams);
     /* [NEW] create variable for all links HTML code */
     let allTagsHTML = '';
     /*[NEW] start LOOP for for each tags in allTags*/
     for(let tag in allTags) {
       /*[NEW] generate code of a link and add it to allTagsHTML*/
-      allTagsHTML +=  '<a href="#tag-' + tag +'">' +  tag + ' (' + allTags[tag] + ') ' + ' </a>';
+      allTagsHTML +=  '<a href="#tag-' + tag +'">' +  tag + ' (' + allTags[tag] + '), ' + ' </a> ';
       console.log(allTagsHTML);
     /*[NEW] END LOOP: for each tag in allTags*/
     }
@@ -139,8 +157,8 @@
   generateTags();
 
   const tagClickHandler = function(event) {
-    //console.log(event);
-    //console.log('tag was clicked');
+    console.log(event);
+    console.log('tag was clicked');
     /* prevent default action for this event */
     event.preventDefault();
     /* make new constant named "clickedElement" and give it the value of "this" */
@@ -179,7 +197,7 @@
   const addClickListenersToTags = function() {
     //console.log(addClickListenersToTags);
     /* find all links to tags */
-    const links = document.querySelectorAll('.post-tags a[href^="#tag-"]');
+    const links = document.querySelectorAll('.post-tags a[href^="#tag-"],  .sidebar a[href^="#tag-"]');
     //console.log (links);
     /* START LOOP: for each link */
     for(let link of links) {
@@ -221,8 +239,8 @@
     event.preventDefault();
     /* make new constant named "clickedElement" and give it the value of "this" */
     const clickedElement = this;
-    //console.log(event);
-    //console.log('Link was clicked!');
+    console.log(event);
+    console.log('Author was clicked!');
     /* make a new constant "href" and read the attribute "href" of the clicked element */
     const href = clickedElement.getAttribute('href');
     //console.log(href);
