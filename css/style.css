@@ -32,6 +32,10 @@ body {
   color: #777777;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Layout */
 .wrapper {
   display: -ms-flexbox;

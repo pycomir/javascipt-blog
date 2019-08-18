@@ -41,6 +41,10 @@ body {
   }
 }
 
+a {
+  text-decoration: none;  
+}
+
 /* Layout */
 
 .wrapper {
@@ -100,8 +104,6 @@ body {
     }
   }
 }
-
-
 
 .sidebar .list.tags {
   .tag-size-5 {
