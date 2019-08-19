@@ -1,4 +1,10 @@
 {
+  const templates = {
+    articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+    tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+    authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
+  }
+
   const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
@@ -58,7 +64,9 @@
       const articleTitle = article.querySelector(optTitleSelector).innerHTML;
       //console.log(articleTitle);
       /* create HTML of the link */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      const linkHTMLData = {id: articleId, title: articleTitle};
+      const linkHTML = templates.articleLink(linkHTMLData);
+      //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
       //console.log(linkHTML);
       /* insert link into titleList */
       html = html + linkHTML;
@@ -123,7 +131,9 @@
       for(let tag of articleTagsArray) {
         //console.log(tag);
         /* generate HTML of the link */
-        const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '&nbsp' + '</a></li>';
+        //const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '&nbsp' + '</a></li>';
+        const linkHTMLData = {id: tag, title: tag};
+        const linkHTML = templates.tagLink(linkHTMLData);
         //console.log(linkHTML);
         /* add generated code to html variable */
         html = html + linkHTML;
@@ -252,7 +262,9 @@
       const author = article.getAttribute('data-author');
       //console.log(author);
       /*create HTML of the link*/
-      const linkHTML ='by &nbsp' + '<a href="#author-' + author +'">' + author + '</a>';
+      const linkHTMLData = {id: author, title: author};
+      const linkHTML = templates.authorLink(linkHTMLData);
+      //const linkHTML ='by &nbsp' + '<a href="#author-' + author +'">' + author + '</a>';
       //console.log(linkHTML);
       /* [NEW] check if this link is NOT already in allTags */
       if(!allAuthors.hasOwnProperty(author)){
